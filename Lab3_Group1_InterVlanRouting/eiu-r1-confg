@@ -1,0 +1,125 @@
+
+!
+! Last configuration change at 08:21:20 UTC Thu Nov 7 2024
+! NVRAM config last updated at 08:59:33 UTC Thu Nov 7 2024 by admin
+! NVRAM config last updated at 08:59:33 UTC Thu Nov 7 2024 by admin
+version 15.1
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname EIU-R1
+!
+boot-start-marker
+boot-end-marker
+!
+!
+enable secret 4 1OOUFZoe6yVNdOsKjeGUWmXLXwnpoWL.D1LSOUECfsE
+!
+no aaa new-model
+!
+!
+no ipv6 cef
+ip source-route
+ip cef
+!
+!
+!
+!
+!
+ip domain name switcheiu.com
+!
+multilink bundle-name authenticated
+!
+!
+crypto pki token default removal timeout 0
+!
+!
+license udi pid CISCO2901/K9 sn FGL164114HJ
+!
+!
+username admin privilege 15 secret 4 opjnnkXqCr4kCOa9DuALcNpBOMetBAc/usnpSWADsCI
+!
+redundancy
+!
+!
+!
+!
+ip ssh time-out 60
+ip ssh version 2
+! 
+!
+!
+!
+!
+!
+!
+interface Embedded-Service-Engine0/0
+ no ip address
+ shutdown
+!
+interface GigabitEthernet0/0
+ no ip address
+ shutdown
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/1
+ no ip address
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/1.10
+ encapsulation dot1Q 10
+ ip address 192.168.10.1 255.255.255.192
+!
+interface GigabitEthernet0/1.20
+ encapsulation dot1Q 20
+ ip address 192.168.10.65 255.255.255.192
+!
+interface GigabitEthernet0/1.30
+ encapsulation dot1Q 30
+ ip address 192.168.10.129 255.255.255.192
+!
+interface Serial0/0/0
+ no ip address
+ shutdown
+ no fair-queue
+ clock rate 2000000
+!
+interface Serial0/0/1
+ no ip address
+ shutdown
+ clock rate 2000000
+!
+ip forward-protocol nd
+!
+no ip http server
+no ip http secure-server
+!
+!
+!
+!
+!
+!
+!
+!
+control-plane
+!
+!
+!
+line con 0
+line aux 0
+line 2
+ no activation-character
+ no exec
+ transport preferred none
+ transport input all
+ transport output pad telnet rlogin lapb-ta mop udptn v120 ssh
+ stopbits 1
+line vty 0 4
+ login local
+ transport input ssh
+!
+scheduler allocate 20000 1000
+end
